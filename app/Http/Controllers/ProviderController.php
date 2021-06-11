@@ -4,9 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Provider;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ProviderController extends Controller
 {
+
+    private $rules;
+
+    public function __construct()
+    {
+        $this->rules= [
+            'provider' => 'required|string|min:4|max:50',
+            'tel_prov' => 'required|string|min:10|max:13',
+            'email_prov' => 'required|email:rfc|max:80',
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,6 +49,16 @@ class ProviderController extends Controller
      */
     public function store(Request $request)
     {
+        /** Validacion del Formulario **/
+        $request->validate(
+            [
+                'provider' => 'required|string|min:4|max:50|unique:App\Models\Provider,provider',
+                'tel_prov' => 'required|string|min:10|max:13|unique:App\Models\Provider,tel_prov',
+                'email_prov' => 'required|email:rfc|max:80',
+                
+            ]);
+        
+        /** Almacenamiento en la DB **/
         $provider=Provider::create($request->all());
         return redirect()->route('provider.index');
     }
@@ -71,6 +94,14 @@ class ProviderController extends Controller
      */
     public function update(Request $request, Provider $provider)
     {
+        /** Validacion del Formulario **/
+        $validated = $request->validate([
+            'provider' => ['required','string','min:4','max:50',Rule::unique('providers')->ignore($provider->id)],
+            'tel_prov' => ['required','string','min:10','max:13',Rule::unique('providers')->ignore($provider->id)],
+            'email_prov' => 'required|email:rfc|max:80',
+        ]);
+
+        /** Update in DB **/
         Provider::where('id', $provider->id)->update($request->except('_token', '_method'));
         return redirect()->route('provider.index');
     }

@@ -11,28 +11,49 @@
     <form action="{{route('provider.store')}}" method="POST">
 @endif
 @csrf
-        <label class="block text-sm">
+        <label class="block text-sm mb-4">
         <span class="text-gray-700 dark:text-gray-400">Nombre del proveedor</span>
             <input 
-                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="Jane Doe" type="text" name="provider" id="provider"
-                value="{{$provider->provider ?? ''}}"
+                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input
+                @error('email_prov') border-red-600 focus:border-red-400 focus:shadow-outline-red @enderror" 
+                placeholder="Jane Doe" type="text" name="provider" id="provider"
+                value="{{ old('provider') ?? $provider->provider ?? '' }}"
             />
+            @error('provider')
+                <span class="text-xs text-red-600 dark:text-red-400">
+                    {{ $message }}
+                </span>
+            @enderror
         </label>
         
-        <label class="block text-sm">
+        <label class="block text-sm mb-4">
             <span class="text-gray-700 dark:text-gray-400">Telefono de Proveedor</span>
             <input 
-                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="Jane Doe" type="text" name="tel_prov" id="tel_prov"
-                value="{{$provider->tel_prov ?? ''}}"
+                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input
+                @error('email_prov') border-red-600 focus:border-red-400 focus:shadow-outline-red @enderror" 
+                placeholder="Jane Doe" type="text" name="tel_prov" id="tel_prov"
+                value="{{ old('tel_prov') ?? $provider->tel_prov ?? '' }}"
             />
+            @error('tel_prov')
+                <span class="text-xs text-red-600 dark:text-red-400">
+                    {{ $message }}
+                </span>
+            @enderror
         </label>
 
         <label class="block text-sm">
             <span class="text-gray-700 dark:text-gray-400">Correo de proveedor</span>
             <input 
-                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="Jane Doe" type="text" name="email_prov" id="email_prov"
-                value="{{$provider->email_prov ?? ''}}"
+                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input
+                @error('email_prov') border-red-600 focus:border-red-400 focus:shadow-outline-red @enderror" 
+                placeholder="Jane Doe" type="text" name="email_prov" id="email_prov"
+                value="{{old('email_prov') ?? $provider->email_prov ?? ''}}"
             />
+            @error('email_prov')
+                <span class="text-xs text-red-600 dark:text-red-400">
+                    {{ $message }}
+                </span>
+            @enderror
         </label>
 
         <div class="mt-4">
