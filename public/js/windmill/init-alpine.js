@@ -43,9 +43,17 @@ function data() {
     closeProfileMenu() {
       this.isProfileMenuOpen = false
     },
-    isPagesMenuOpen: false,
-    togglePagesMenu() {
-      this.isPagesMenuOpen = !this.isPagesMenuOpen
+    isProductsMenuOpen: false,
+    toggleProductsMenu() {
+      this.isProductsMenuOpen = !this.isProductsMenuOpen
+    },
+    isProvidersMenuOpen: false,
+    toggleProvidersMenu() {
+      this.isProvidersMenuOpen = !this.isProvidersMenuOpen
+    },
+    isPurchasesMenuOpen: false,
+    togglePurchasesMenu() {
+      this.isPurchasesMenuOpen = !this.isPurchasesMenuOpen
     },
     // Modal
     isModalOpen: false,
