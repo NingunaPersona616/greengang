@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -14,7 +17,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products=Product::get();
+        /*
+        $products=DB::table('products')
+                        ->select('id', 'product', 'unitprice', 'availableunits', 'status', 'category_id')
+                        ->get();
+        */
+        return view('product.product-index', compact('products'));
     }
 
     /**
@@ -24,7 +33,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories=Category::get();
+        return view('product.product-form', compact('categories'));
     }
 
     /**
@@ -35,7 +45,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'product'=>'required|string|min:4|max:150|unique:App\Models\Product,product',
+            'description'=>'required|string|min:10|max:250',
+            'unitprice'=>'required|regex:/^[\d]{1,5}(\.[\d]{1,2})?$/',
+            'category_id'=>'required',
+        ]);
+
+        $producto=Product::create($request->all());
+        return redirect()->route('product.index');
     }
 
     /**
@@ -46,7 +64,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view('product.product-show', compact('product'));
     }
 
     /**
@@ -57,7 +75,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $categories=Category::where('id', '!=' , $product->category_id)->get();
+        return view('product.product-form', compact('product', 'categories'));
     }
 
     /**
@@ -69,7 +88,15 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $validated = $request->validate([
+            'product' => ['required','string','min:4','max:150',Rule::unique('products')->ignore($product->id)],
+            'description' => ['required','string','min:10','max:250'],
+            'unitprice' => 'required|regex:/^[\d]{1,5}(\.[\d]{1,2})?$/',
+            'category_id' => 'required',
+        ]);
+
+        Product::where('id', $product->id)->update($request->except('_token', '_method'));
+        return redirect()->route('product.show', $product);
     }
 
     /**
@@ -80,6 +107,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('product.index');
     }
 }
