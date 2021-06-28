@@ -17,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products=Product::get();
+        $products=Product::with('category')->get();
         /*
         $products=DB::table('products')
                         ->select('id', 'product', 'unitprice', 'availableunits', 'status', 'category_id')

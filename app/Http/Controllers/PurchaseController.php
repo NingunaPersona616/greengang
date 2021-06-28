@@ -18,7 +18,7 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        $purchases=Purchase::get();
+        $purchases=Purchase::with('user:id,name', 'provider:id,provider')->get();
         return view('purchase.purchase-index', compact('purchases'));
     }
 
