@@ -95,6 +95,11 @@
                       <span class="ml-2">Usuario</span>
                     </label>
                   </div>
+                  @error('user_type')
+                    <span class="text-xs text-red-600 dark:text-red-400">
+                      {{ $message }}
+                    </span>
+                  @enderror
                 </div>  
 
                 <label class="block mt-4 text-sm">
