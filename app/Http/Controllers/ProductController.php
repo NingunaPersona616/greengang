@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
 {
@@ -33,6 +34,9 @@ class ProductController extends Controller
      */
     public function create()
     {
+        if(! Gate::allows('admin-products')){
+            abort(403);
+        }
         $categories=Category::get();
         return view('product.product-form', compact('categories'));
     }
@@ -75,6 +79,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        $this->authorize('update');
         $categories=Category::where('id', '!=' , $product->category_id)->get();
         return view('product.product-form', compact('product', 'categories'));
     }
@@ -88,6 +93,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        $this->authorize('update');
         $validated = $request->validate([
             'product' => ['required','string','min:4','max:150',Rule::unique('products')->ignore($product->id)],
             'description' => ['required','string','min:10','max:250'],
@@ -107,6 +113,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        $this->authorize('delete', $product);
         $product->delete();
         return redirect()->route('product.index');
     }
