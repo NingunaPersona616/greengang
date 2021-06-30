@@ -84,7 +84,7 @@
           </td>
           <td class="px-4 py-3">
             <div class="flex items-center space-x-4 text-sm">
-              @can('update', Product::class)  
+              @can('update', $product)  
               <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-blue-500 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Edit"> 
                 <a href="{{route('product.edit', $product->id)}}">
                   <svg

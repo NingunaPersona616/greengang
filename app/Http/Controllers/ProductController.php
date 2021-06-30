@@ -79,7 +79,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $this->authorize('update');
+        $this->authorize('update', $product);
         $categories=Category::where('id', '!=' , $product->category_id)->get();
         return view('product.product-form', compact('product', 'categories'));
     }
@@ -93,7 +93,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $this->authorize('update');
+        $this->authorize('update', $product);
         $validated = $request->validate([
             'product' => ['required','string','min:4','max:150',Rule::unique('products')->ignore($product->id)],
             'description' => ['required','string','min:10','max:250'],
