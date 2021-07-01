@@ -1,5 +1,17 @@
 @extends('layouts.temp')
 @section('contenido')
+
+<div>
+  <a class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-white
+    border border-transparent focus:outline-none mt-4"
+    href="{{route('purchase.index')}}"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="#1c64f2">
+      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z" clip-rule="evenodd" />
+    </svg>
+  </a>
+</div>
+
 <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
     Detalle de la compra: &nbsp; &nbsp;
     <span class="text-2xl font-medium uppercase text-gray-500 dark:text-gray-200">

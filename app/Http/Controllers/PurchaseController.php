@@ -41,12 +41,10 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        /*$request->validate([
-            'product'=>'required|string|min:4|max:150|unique:App\Models\Product,product',
-            'description'=>'required|string|min:10|max:250',
-            'unitprice'=>'required|regex:/^[\d]{1,5}(\.[\d]{1,2})?$/',
-            'category_id'=>'required',
-        ]);*/
+        $request->validate([
+
+            'provider_id'=>'required',
+        ]);
         //$request=merge(['user_id' => $request->user()->id]);
         //$purchase=Purchase::create($request->all());
         $purchase= new Purchase($request->except('created_at'));
@@ -61,7 +59,7 @@ class PurchaseController extends Controller
     public function insertProduct(Request $request, Purchase $purchase)
     {
         $purchase->products()->attach($request->product_id);
-        return view('dashboard');
+        return redirect()->route('purchase.index');
     }
 
     /**
