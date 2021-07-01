@@ -41,7 +41,7 @@
               <!-- text-gray-800 dark:text-gray-100 -->
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="#"
+                href="{{route('inicio')}}"
               >
                 <svg
                   class="w-5 h-5"
@@ -57,7 +57,7 @@
                     d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                   ></path>
                 </svg>
-                <span class="ml-4">Dashboard</span>
+                <span class="ml-4">Inicio</span>
               </a>
             </li>
           </ul>
@@ -112,13 +112,13 @@
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <a class="w-full" href="./login.html">Registrar Compra</a>
+                    <a class="w-full" href="{{route('purchase.create')}}">Registrar Compra</a>
                   </li>
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <a class="w-full" href="./create-account.html">
-                      Buscar Compra
+                    <a class="w-full" href="{{route('purchase.index')}}">
+                      Listar Compras
                     </a>
                   </li>
                 </ul>
@@ -314,7 +314,7 @@
               <!-- text-gray-800 dark:text-gray-100 -->
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="../index.html"
+                href="{{route('inicio')}}"
               >
                 <svg
                   class="w-5 h-5"
@@ -330,7 +330,7 @@
                     d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                   ></path>
                 </svg>
-                <span class="ml-4">Dashboard</span>
+                <span class="ml-4">Inicio</span>
               </a>
             </li>
           </ul>
@@ -385,13 +385,13 @@
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <a class="w-full" href="./login.html">Registrar Compra</a>
+                    <a class="w-full" href="{{route('purchase.create')}}">Registrar Compra</a>
                   </li>
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <a class="w-full" href="./create-account.html">
-                      Buscar Compra
+                    <a class="w-full" href="{{route('purchase.index')}}">
+                      Listar Compras
                     </a>
                   </li>
                   
@@ -531,14 +531,18 @@
               </template>
             </li>
           </ul>
+
+          @guest
           <div class="px-6 my-6">
-            <button
-              class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-gray-600 transition-colors duration-150 bg-green-100 border border-transparent rounded-lg active:bg-green-600 hover:bg-gray-100 focus:outline-none focus:shadow-outline-green"
+            <a
+            class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-gray-600 transition-colors duration-150 bg-green-100 border border-transparent rounded-lg active:bg-green-600 hover:bg-gray-100 focus:outline-none focus:shadow-outline-green"
             >
-              Create account
-              <span class="ml-2" aria-hidden="true">+</span>
-            </button>
+            Registrarse
+            <span class="ml-2" aria-hidden="true">+</span>
+            </a>
           </div>
+          @endguest
+          
         </div>
       </aside>
       <div class="flex flex-col flex-1">
@@ -570,24 +574,10 @@
               <div
                 class="relative w-full max-w-xl mr-6 focus-within:text-green-500"
               >
-                <div class="absolute inset-y-0 flex items-center pl-2">
-                  <svg
-                    class="w-4 h-4"
-                    aria-hidden="true"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </div>
                 <input
-                  class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-green-300 focus:outline-none focus:shadow-outline-green form-input"
+                  class="w-full pl-8 pr-2 border-0 rounded-md"
                   type="text"
-                  placeholder="Search for projects"
+                  disabled
                   aria-label="Search"
                 />
               </div>
